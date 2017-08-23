@@ -7,21 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class LocationsToCruis
+    public partial class Users_GetById_Result
     {
-        public int LocationsToCruisesId { get; set; }
-        public int LocationId { get; set; }
-        public int CruiseId { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Gender { get; set; }
+        public string City { get; set; }
+        public string Description { get; set; }
+        public string ProfilePhoto { get; set; }
+        public string AspUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> DateInserted { get; set; }
-        public Nullable<System.DateTime> DateModified { get; set; }
-    
-        public virtual Cruis Cruis { get; set; }
-        public virtual Location Location { get; set; }
     }
 }

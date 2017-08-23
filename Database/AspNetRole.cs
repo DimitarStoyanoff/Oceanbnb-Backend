@@ -7,29 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Ship
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ship()
+        public AspNetRole()
         {
-            this.Cruises = new HashSet<Cruis>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
-        public int ShipId { get; set; }
-        public string ShipName { get; set; }
-        public Nullable<int> YearBuilt { get; set; }
-        public Nullable<int> PassengerCapacity { get; set; }
-        public Nullable<int> CrewCount { get; set; }
-        public Nullable<int> WeightInTons { get; set; }
-        public Nullable<int> LengthInMeters { get; set; }
-        public Nullable<int> BeamInMeters { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cruis> Cruises { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

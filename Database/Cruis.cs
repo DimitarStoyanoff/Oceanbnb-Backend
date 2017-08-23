@@ -7,24 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Cruis
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Location()
+        public Cruis()
         {
             this.LocationsToCruises = new HashSet<LocationsToCruis>();
+            this.UsersToCruises = new HashSet<UsersToCruis>();
         }
     
-        public int LocationId { get; set; }
-        public string LocationName { get; set; }
-        public System.Data.Entity.Spatial.DbGeography Geolocation { get; set; }
+        public int CruiseId { get; set; }
+        public string CruiseName { get; set; }
+        public Nullable<int> ShipId { get; set; }
     
+        public virtual Ship Ship { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LocationsToCruis> LocationsToCruises { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsersToCruis> UsersToCruises { get; set; }
     }
 }

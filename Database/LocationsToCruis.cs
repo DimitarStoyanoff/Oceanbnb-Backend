@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UsersToCruis
+    public partial class LocationsToCruis
     {
-        public int UsersToCruisesId { get; set; }
-        public int UserId { get; set; }
+        public int LocationsToCruisesId { get; set; }
+        public int LocationId { get; set; }
         public int CruiseId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }
     
         public virtual Cruis Cruis { get; set; }
-        public virtual User User { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

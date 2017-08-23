@@ -7,30 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Ship
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Ship()
         {
-            this.UsersToCruises = new HashSet<UsersToCruis>();
+            this.Cruises = new HashSet<Cruis>();
         }
     
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Gender { get; set; }
-        public string City { get; set; }
-        public string Description { get; set; }
-        public string ProfilePhoto { get; set; }
-        public string AspUserId { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
+        public int ShipId { get; set; }
+        public string ShipName { get; set; }
+        public Nullable<int> YearBuilt { get; set; }
+        public Nullable<int> PassengerCapacity { get; set; }
+        public Nullable<int> CrewCount { get; set; }
+        public Nullable<int> WeightInTons { get; set; }
+        public Nullable<int> LengthInMeters { get; set; }
+        public Nullable<int> BeamInMeters { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersToCruis> UsersToCruises { get; set; }
+        public virtual ICollection<Cruis> Cruises { get; set; }
     }
 }

@@ -4,19 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7640ff1fd0cc47379895f0c78e8179a2" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="367ad10ead534d27a35a23676565c7fb" Name="Diagram1">
+        <EntityTypeShape EntityType="OceanbnbDbModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OceanbnbDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OceanbnbDbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OceanbnbDbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="OceanbnbDbModel.AspNetUser" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.Cruis" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.Location" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.LocationsToCruis" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.Ship" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OceanbnbDbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OceanbnbDbModel.sysdiagram" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.User" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OceanbnbDbModel.UsersToCruis" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="OceanbnbDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="OceanbnbDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="OceanbnbDbModel.FK_Cruises_Ships" ManuallyRouted="false" />
         <AssociationConnector Association="OceanbnbDbModel.FK_LocationsToCruises_Cruises" ManuallyRouted="false" />
         <AssociationConnector Association="OceanbnbDbModel.FK_UsersToCruises_Cruises" ManuallyRouted="false" />
         <AssociationConnector Association="OceanbnbDbModel.FK_LocationsToCruises_Locations" ManuallyRouted="false" />
         <AssociationConnector Association="OceanbnbDbModel.FK_UsersToCruises_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="OceanbnbDbModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
