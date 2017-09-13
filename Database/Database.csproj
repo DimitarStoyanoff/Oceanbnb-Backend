@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E73F7E38-57A0-43C9-92B0-58EA7DA9368F}</ProjectGuid>
+    <ProjectGuid>{4A78312E-6A6B-4CD9-8FF2-44D734A6B7C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Database</RootNamespace>
@@ -50,87 +50,120 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspNetRole.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUser.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserClaim.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogin.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Cruis.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cruises_GetAllCruises_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cruises_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="LocationsToCruis.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="OceanbnbDbModel.Context.cs">
+    <Compile Include="LocationsToCruises_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocationsToCruises_GetCruiseLocations_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Locations_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OceanbnbDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OceanbnbDbModel.Context.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="OceanbnbDbModel.cs">
+    <Compile Include="OceanbnbDb.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="OceanbnbDbModel.Designer.cs">
+    <Compile Include="OceanbnbDb.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OceanbnbDbModel.edmx</DependentUpon>
+      <DependentUpon>OceanbnbDb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ships_GetAllShips_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ships_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersToCruis.cs">
-      <DependentUpon>OceanbnbDbModel.tt</DependentUpon>
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersToCruises_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersToCruises_GetUserCruises_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users_GetByAspId_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="OceanbnbDbModel.edmx">
+    <EntityDeploy Include="OceanbnbDb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OceanbnbDbModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>OceanbnbDb.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="OceanbnbDbModel.edmx.diagram">
-      <DependentUpon>OceanbnbDbModel.edmx</DependentUpon>
+    <None Include="OceanbnbDb.edmx.diagram">
+      <DependentUpon>OceanbnbDb.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OceanbnbDbModel.Context.tt">
+    <Content Include="OceanbnbDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OceanbnbDbModel.Context.cs</LastGenOutput>
-      <DependentUpon>OceanbnbDbModel.edmx</DependentUpon>
+      <LastGenOutput>OceanbnbDb.Context.cs</LastGenOutput>
+      <DependentUpon>OceanbnbDb.edmx</DependentUpon>
     </Content>
-    <Content Include="OceanbnbDbModel.tt">
+    <Content Include="OceanbnbDb.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OceanbnbDbModel.edmx</DependentUpon>
-      <LastGenOutput>OceanbnbDbModel.cs</LastGenOutput>
+      <DependentUpon>OceanbnbDb.edmx</DependentUpon>
+      <LastGenOutput>OceanbnbDb.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

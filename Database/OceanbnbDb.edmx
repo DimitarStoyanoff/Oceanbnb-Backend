@@ -73,6 +73,7 @@
           <Property Name="CruiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CruiseName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ShipId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Locations">
           <Key>
@@ -81,6 +82,7 @@
           <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Geolocation" Type="geography" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="LocationsToCruises">
           <Key>
@@ -105,6 +107,7 @@
           <Property Name="WeightInTons" Type="int" />
           <Property Name="LengthInMeters" Type="int" />
           <Property Name="BeamInMeters" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -233,6 +236,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="AspUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsersToCruises_Cruises">
           <End Role="Cruises" Type="Self.Cruises" Multiplicity="1" />
           <End Role="UsersToCruises" Type="Self.UsersToCruises" Multiplicity="*" />
@@ -257,7 +272,81 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Cruises_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Cruises_GetAllCruises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Cruises_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Cruises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CruiseName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShipId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Cruises_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+          <Parameter Name="CruiseName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ShipId" Type="int" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Locations_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Locations_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Locations_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lat" Type="float" Mode="In" />
+          <Parameter Name="Long" Type="float" Mode="In" />
+        </Function>
+        <Function Name="Locations_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationId" Type="int" Mode="In" />
+          <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lat" Type="float" Mode="In" />
+          <Parameter Name="Long" Type="float" Mode="In" />
+        </Function>
+        <Function Name="LocationsToCruises_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationToCruiseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LocationsToCruises_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationsToCruisesId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LocationsToCruises_GetCruiseLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LocationsToCruises_InsertUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationsToCruisesId" Type="int" Mode="In" />
+          <Parameter Name="LocationId" Type="int" Mode="In" />
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Ships_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ShipId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Ships_GetAllShips" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Ships_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ShipId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Ships_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ShipName" Type="nvarchar" Mode="In" />
+          <Parameter Name="YearBuilt" Type="int" Mode="In" />
+          <Parameter Name="PassengerCapactiy" Type="int" Mode="In" />
+          <Parameter Name="CrewCount" Type="int" Mode="In" />
+          <Parameter Name="WeightInTons" Type="int" Mode="In" />
+          <Parameter Name="LengthInMeters" Type="int" Mode="In" />
+          <Parameter Name="BeamInMeters" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Ships_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ShipId" Type="int" Mode="In" />
+          <Parameter Name="ShipName" Type="nvarchar" Mode="In" />
+          <Parameter Name="YearBuilt" Type="int" Mode="In" />
+          <Parameter Name="PassengerCapactiy" Type="int" Mode="In" />
+          <Parameter Name="CrewCount" Type="int" Mode="In" />
+          <Parameter Name="WeightInTons" Type="int" Mode="In" />
+          <Parameter Name="LengthInMeters" Type="int" Mode="In" />
+          <Parameter Name="BeamInMeters" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -291,6 +380,9 @@
         <Function Name="Users_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="Users_GetByAspId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Users_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -311,6 +403,21 @@
           <Parameter Name="City" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
           <Parameter Name="ProfilePhoto" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UsersToCruises_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsersToCruisesId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UsersToCruises_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsersToCruisesId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UsersToCruises_GetUserCruises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UsersToCruises_InsertUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsersToCruisesId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="CruiseId" Type="int" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="OceanbnbDbModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
@@ -353,6 +460,10 @@
           <AssociationSet Name="FK_LocationsToCruises_Locations" Association="Self.FK_LocationsToCruises_Locations">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="LocationsToCruises" EntitySet="LocationsToCruises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_AspNetUsers" Association="Self.FK_Users_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_UsersToCruises_Cruises" Association="Self.FK_UsersToCruises_Cruises">
             <End Role="Cruises" EntitySet="Cruises" />
@@ -425,6 +536,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_AspNetUsers" FromRole="AspNetUsers" ToRole="Users" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Cruis">
@@ -434,6 +546,7 @@
           <Property Name="CruiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CruiseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ShipId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Ship" Relationship="Self.FK_Cruises_Ships" FromRole="Cruises" ToRole="Ships" />
           <NavigationProperty Name="LocationsToCruises" Relationship="Self.FK_LocationsToCruises_Cruises" FromRole="Cruises" ToRole="LocationsToCruises" />
           <NavigationProperty Name="UsersToCruises" Relationship="Self.FK_UsersToCruises_Cruises" FromRole="Cruises" ToRole="UsersToCruises" />
@@ -445,6 +558,7 @@
           <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Geolocation" Type="Geography" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="LocationsToCruises" Relationship="Self.FK_LocationsToCruises_Locations" FromRole="Locations" ToRole="LocationsToCruises" />
         </EntityType>
         <EntityType Name="LocationsToCruis">
@@ -472,6 +586,7 @@
           <Property Name="WeightInTons" Type="Int32" />
           <Property Name="LengthInMeters" Type="Int32" />
           <Property Name="BeamInMeters" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Cruises" Relationship="Self.FK_Cruises_Ships" FromRole="Ships" ToRole="Cruises" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -497,6 +612,7 @@
           <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AspUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Users_AspNetUsers" FromRole="Users" ToRole="AspNetUsers" />
           <NavigationProperty Name="UsersToCruises" Relationship="Self.FK_UsersToCruises_Users" FromRole="Users" ToRole="UsersToCruises" />
         </EntityType>
         <EntityType Name="UsersToCruis">
@@ -537,6 +653,18 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="AspUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -625,6 +753,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Users_AspNetUsers" Association="Self.FK_Users_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cruises_Ships" Association="Self.FK_Cruises_Ships">
             <End Role="Ships" EntitySet="Ships" />
             <End Role="Cruises" EntitySet="Cruises" />
@@ -649,6 +781,80 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="Cruises_Delete" ReturnType="Collection(Decimal)">
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Cruises_GetAllCruises" ReturnType="Collection(OceanbnbDbModel.Cruises_GetAllCruises_Result)" />
+          <FunctionImport Name="Cruises_GetById" ReturnType="Collection(OceanbnbDbModel.Cruises_GetById_Result)">
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Cruises_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CruiseName" Mode="In" Type="String" />
+            <Parameter Name="ShipId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Cruises_Update" ReturnType="Collection(Decimal)">
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+            <Parameter Name="CruiseName" Mode="In" Type="String" />
+            <Parameter Name="ShipId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Locations_Delete" ReturnType="Collection(Decimal)">
+            <Parameter Name="LocationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Locations_GetById" ReturnType="Collection(OceanbnbDbModel.Locations_GetById_Result)">
+            <Parameter Name="LocationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Locations_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+            <Parameter Name="Lat" Mode="In" Type="Double" />
+            <Parameter Name="Long" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="Locations_Update" ReturnType="Collection(Decimal)">
+            <Parameter Name="LocationId" Mode="In" Type="Int32" />
+            <Parameter Name="LocationName" Mode="In" Type="String" />
+            <Parameter Name="Lat" Mode="In" Type="Double" />
+            <Parameter Name="Long" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="LocationsToCruises_Delete" ReturnType="Collection(Decimal)">
+            <Parameter Name="LocationToCruiseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LocationsToCruises_GetById" ReturnType="Collection(OceanbnbDbModel.LocationsToCruises_GetById_Result)">
+            <Parameter Name="LocationsToCruisesId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LocationsToCruises_GetCruiseLocations" ReturnType="Collection(OceanbnbDbModel.LocationsToCruises_GetCruiseLocations_Result)">
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LocationsToCruises_InsertUpdate" ReturnType="Collection(Decimal)">
+            <Parameter Name="LocationsToCruisesId" Mode="In" Type="Int32" />
+            <Parameter Name="LocationId" Mode="In" Type="Int32" />
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Ships_Delete">
+            <Parameter Name="ShipId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Ships_GetAllShips" ReturnType="Collection(OceanbnbDbModel.Ships_GetAllShips_Result)" />
+          <FunctionImport Name="Ships_GetById" ReturnType="Collection(OceanbnbDbModel.Ships_GetById_Result)">
+            <Parameter Name="ShipId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Ships_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="ShipName" Mode="In" Type="String" />
+            <Parameter Name="YearBuilt" Mode="In" Type="Int32" />
+            <Parameter Name="PassengerCapactiy" Mode="In" Type="Int32" />
+            <Parameter Name="CrewCount" Mode="In" Type="Int32" />
+            <Parameter Name="WeightInTons" Mode="In" Type="Int32" />
+            <Parameter Name="LengthInMeters" Mode="In" Type="Int32" />
+            <Parameter Name="BeamInMeters" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Ships_Update" ReturnType="Collection(Decimal)">
+            <Parameter Name="ShipId" Mode="In" Type="Int32" />
+            <Parameter Name="ShipName" Mode="In" Type="String" />
+            <Parameter Name="YearBuilt" Mode="In" Type="Int32" />
+            <Parameter Name="PassengerCapactiy" Mode="In" Type="Int32" />
+            <Parameter Name="CrewCount" Mode="In" Type="Int32" />
+            <Parameter Name="WeightInTons" Mode="In" Type="Int32" />
+            <Parameter Name="LengthInMeters" Mode="In" Type="Int32" />
+            <Parameter Name="BeamInMeters" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -682,6 +888,9 @@
           <FunctionImport Name="Users_Delete">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Users_GetByAspId" ReturnType="Collection(OceanbnbDbModel.Users_GetByAspId_Result)">
+            <Parameter Name="AspUserId" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="Users_GetById" ReturnType="Collection(OceanbnbDbModel.Users_GetById_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -703,7 +912,77 @@
             <Parameter Name="Description" Mode="In" Type="String" />
             <Parameter Name="ProfilePhoto" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="UsersToCruises_Delete" ReturnType="Collection(Decimal)">
+            <Parameter Name="UsersToCruisesId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsersToCruises_GetById" ReturnType="Collection(OceanbnbDbModel.UsersToCruises_GetById_Result)">
+            <Parameter Name="UsersToCruisesId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsersToCruises_GetUserCruises" ReturnType="Collection(OceanbnbDbModel.UsersToCruises_GetUserCruises_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UsersToCruises_InsertUpdate" ReturnType="Collection(Decimal)">
+            <Parameter Name="UsersToCruisesId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="CruiseId" Mode="In" Type="Int32" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Cruises_GetAllCruises_Result">
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="String" Name="CruiseName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ShipId" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Cruises_GetById_Result">
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="String" Name="CruiseName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ShipId" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Locations_GetById_Result">
+          <Property Type="Int32" Name="LocationId" Nullable="false" />
+          <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LocationsToCruises_GetById_Result">
+          <Property Type="Int32" Name="LocationsToCruisesId" Nullable="false" />
+          <Property Type="Int32" Name="LocationId" Nullable="false" />
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="DateTime" Name="DateInserted" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="LocationsToCruises_GetCruiseLocations_Result">
+          <Property Type="Int32" Name="LocationsToCruisesId" Nullable="false" />
+          <Property Type="Int32" Name="LocationId" Nullable="false" />
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="DateTime" Name="DateInserted" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Ships_GetAllShips_Result">
+          <Property Type="Int32" Name="ShipId" Nullable="false" />
+          <Property Type="String" Name="ShipName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="YearBuilt" Nullable="true" />
+          <Property Type="Int32" Name="PassengerCapacity" Nullable="true" />
+          <Property Type="Int32" Name="CrewCount" Nullable="true" />
+          <Property Type="Int32" Name="WeightInTons" Nullable="true" />
+          <Property Type="Int32" Name="LengthInMeters" Nullable="true" />
+          <Property Type="Int32" Name="BeamInMeters" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Ships_GetById_Result">
+          <Property Type="Int32" Name="ShipId" Nullable="false" />
+          <Property Type="String" Name="ShipName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="YearBuilt" Nullable="true" />
+          <Property Type="Int32" Name="PassengerCapacity" Nullable="true" />
+          <Property Type="Int32" Name="CrewCount" Nullable="true" />
+          <Property Type="Int32" Name="WeightInTons" Nullable="true" />
+          <Property Type="Int32" Name="LengthInMeters" Nullable="true" />
+          <Property Type="Int32" Name="BeamInMeters" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -715,6 +994,16 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Users_GetByAspId_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="ProfilePhoto" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="Users_GetById_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
@@ -725,6 +1014,22 @@
           <Property Type="String" Name="ProfilePhoto" Nullable="true" />
           <Property Type="String" Name="AspUserId" Nullable="true" MaxLength="128" />
           <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UsersToCruises_GetById_Result">
+          <Property Type="Int32" Name="UsersToCruisesId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="DateTime" Name="DateInserted" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="UsersToCruises_GetUserCruises_Result">
+          <Property Type="Int32" Name="UsersToCruisesId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="CruiseId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="DateTime" Name="DateInserted" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -793,6 +1098,7 @@
                 <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
                 <ScalarProperty Name="CruiseName" ColumnName="CruiseName" />
                 <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -802,6 +1108,7 @@
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
                 <ScalarProperty Name="Geolocation" ColumnName="Geolocation" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -828,6 +1135,7 @@
                 <ScalarProperty Name="WeightInTons" ColumnName="WeightInTons" />
                 <ScalarProperty Name="LengthInMeters" ColumnName="LengthInMeters" />
                 <ScalarProperty Name="BeamInMeters" ColumnName="BeamInMeters" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -877,6 +1185,100 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Cruises_Delete" FunctionName="OceanbnbDbModel.Store.Cruises_Delete" />
+          <FunctionImportMapping FunctionImportName="Cruises_GetAllCruises" FunctionName="OceanbnbDbModel.Store.Cruises_GetAllCruises">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Cruises_GetAllCruises_Result">
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="CruiseName" ColumnName="CruiseName" />
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Cruises_GetById" FunctionName="OceanbnbDbModel.Store.Cruises_GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Cruises_GetById_Result">
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="CruiseName" ColumnName="CruiseName" />
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Cruises_Insert" FunctionName="OceanbnbDbModel.Store.Cruises_Insert" />
+          <FunctionImportMapping FunctionImportName="Cruises_Update" FunctionName="OceanbnbDbModel.Store.Cruises_Update" />
+          <FunctionImportMapping FunctionImportName="Locations_Delete" FunctionName="OceanbnbDbModel.Store.Locations_Delete" />
+          <FunctionImportMapping FunctionImportName="Locations_GetById" FunctionName="OceanbnbDbModel.Store.Locations_GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Locations_GetById_Result">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Locations_Insert" FunctionName="OceanbnbDbModel.Store.Locations_Insert" />
+          <FunctionImportMapping FunctionImportName="Locations_Update" FunctionName="OceanbnbDbModel.Store.Locations_Update" />
+          <FunctionImportMapping FunctionImportName="LocationsToCruises_Delete" FunctionName="OceanbnbDbModel.Store.LocationsToCruises_Delete" />
+          <FunctionImportMapping FunctionImportName="LocationsToCruises_GetById" FunctionName="OceanbnbDbModel.Store.LocationsToCruises_GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.LocationsToCruises_GetById_Result">
+                <ScalarProperty Name="LocationsToCruisesId" ColumnName="LocationsToCruisesId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LocationsToCruises_GetCruiseLocations" FunctionName="OceanbnbDbModel.Store.LocationsToCruises_GetCruiseLocations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.LocationsToCruises_GetCruiseLocations_Result">
+                <ScalarProperty Name="LocationsToCruisesId" ColumnName="LocationsToCruisesId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LocationsToCruises_InsertUpdate" FunctionName="OceanbnbDbModel.Store.LocationsToCruises_InsertUpdate" />
+          <FunctionImportMapping FunctionImportName="Ships_Delete" FunctionName="OceanbnbDbModel.Store.Ships_Delete" />
+          <FunctionImportMapping FunctionImportName="Ships_GetAllShips" FunctionName="OceanbnbDbModel.Store.Ships_GetAllShips">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Ships_GetAllShips_Result">
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+                <ScalarProperty Name="PassengerCapacity" ColumnName="PassengerCapacity" />
+                <ScalarProperty Name="CrewCount" ColumnName="CrewCount" />
+                <ScalarProperty Name="WeightInTons" ColumnName="WeightInTons" />
+                <ScalarProperty Name="LengthInMeters" ColumnName="LengthInMeters" />
+                <ScalarProperty Name="BeamInMeters" ColumnName="BeamInMeters" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Ships_GetById" FunctionName="OceanbnbDbModel.Store.Ships_GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Ships_GetById_Result">
+                <ScalarProperty Name="ShipId" ColumnName="ShipId" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+                <ScalarProperty Name="PassengerCapacity" ColumnName="PassengerCapacity" />
+                <ScalarProperty Name="CrewCount" ColumnName="CrewCount" />
+                <ScalarProperty Name="WeightInTons" ColumnName="WeightInTons" />
+                <ScalarProperty Name="LengthInMeters" ColumnName="LengthInMeters" />
+                <ScalarProperty Name="BeamInMeters" ColumnName="BeamInMeters" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Ships_Insert" FunctionName="OceanbnbDbModel.Store.Ships_Insert" />
+          <FunctionImportMapping FunctionImportName="Ships_Update" FunctionName="OceanbnbDbModel.Store.Ships_Update" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="OceanbnbDbModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="OceanbnbDbModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="OceanbnbDbModel.Store.sp_dropdiagram" />
@@ -902,6 +1304,20 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="OceanbnbDbModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="OceanbnbDbModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="Users_Delete" FunctionName="OceanbnbDbModel.Store.Users_Delete" />
+          <FunctionImportMapping FunctionImportName="Users_GetByAspId" FunctionName="OceanbnbDbModel.Store.Users_GetByAspId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.Users_GetByAspId_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Users_GetById" FunctionName="OceanbnbDbModel.Store.Users_GetById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OceanbnbDbModel.Users_GetById_Result">
@@ -919,6 +1335,32 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Users_Insert" FunctionName="OceanbnbDbModel.Store.Users_Insert" />
           <FunctionImportMapping FunctionImportName="Users_Update" FunctionName="OceanbnbDbModel.Store.Users_Update" />
+          <FunctionImportMapping FunctionImportName="UsersToCruises_Delete" FunctionName="OceanbnbDbModel.Store.UsersToCruises_Delete" />
+          <FunctionImportMapping FunctionImportName="UsersToCruises_GetById" FunctionName="OceanbnbDbModel.Store.UsersToCruises_GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.UsersToCruises_GetById_Result">
+                <ScalarProperty Name="UsersToCruisesId" ColumnName="UsersToCruisesId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsersToCruises_GetUserCruises" FunctionName="OceanbnbDbModel.Store.UsersToCruises_GetUserCruises">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OceanbnbDbModel.UsersToCruises_GetUserCruises_Result">
+                <ScalarProperty Name="UsersToCruisesId" ColumnName="UsersToCruisesId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CruiseId" ColumnName="CruiseId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsersToCruises_InsertUpdate" FunctionName="OceanbnbDbModel.Store.UsersToCruises_InsertUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

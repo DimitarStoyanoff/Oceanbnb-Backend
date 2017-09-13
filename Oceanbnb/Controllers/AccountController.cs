@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using Oceanbnb.Models;
 using Oceanbnb.Providers;
 using Oceanbnb.Results;
+using Services.Implementations;
+using Services.Models;
 
 namespace Oceanbnb.Controllers
 {
@@ -25,6 +27,7 @@ namespace Oceanbnb.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private UserService userService = new UserService();
 
         public AccountController()
         {
@@ -54,16 +57,11 @@ namespace Oceanbnb.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public UserModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            return new UserInfoViewModel
-            {
-                Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
-            };
+            UserModel dbUser =  userService.GetUserByIdentityId(User.Identity.GetUserId());
+            return dbUser;
         }
 
         // POST api/Account/Logout
@@ -337,6 +335,7 @@ namespace Oceanbnb.Controllers
                 return GetErrorResult(result);
             }
 
+            userService.Insert(user.Email, user.Email, null, null, null, null, user.Id);
             return Ok();
         }
 

@@ -24,6 +24,7 @@ namespace Database
         public int CruiseId { get; set; }
         public string CruiseName { get; set; }
         public Nullable<int> ShipId { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Ship Ship { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

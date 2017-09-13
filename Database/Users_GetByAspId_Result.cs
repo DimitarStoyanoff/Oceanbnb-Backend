@@ -10,16 +10,9 @@
 namespace Database
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class User
+    public partial class Users_GetByAspId_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.UsersToCruises = new HashSet<UsersToCruis>();
-        }
-    
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -27,11 +20,6 @@ namespace Database
         public string City { get; set; }
         public string Description { get; set; }
         public string ProfilePhoto { get; set; }
-        public string AspUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsersToCruis> UsersToCruises { get; set; }
     }
 }

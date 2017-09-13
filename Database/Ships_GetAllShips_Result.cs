@@ -10,16 +10,9 @@
 namespace Database
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Ship
+    public partial class Ships_GetAllShips_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ship()
-        {
-            this.Cruises = new HashSet<Cruis>();
-        }
-    
         public int ShipId { get; set; }
         public string ShipName { get; set; }
         public Nullable<int> YearBuilt { get; set; }
@@ -29,8 +22,5 @@ namespace Database
         public Nullable<int> LengthInMeters { get; set; }
         public Nullable<int> BeamInMeters { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cruis> Cruises { get; set; }
     }
 }
