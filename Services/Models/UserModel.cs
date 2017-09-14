@@ -18,6 +18,11 @@ namespace Services.Models
         public string AspUserId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
 
+        public UserModel()
+        {
+
+        }
+
         public UserModel(int userId, string userName, string email, string gender, string city, string description, string profilePhoto, string aspUserId, bool? isDeleted)
         {
             UserId = userId;

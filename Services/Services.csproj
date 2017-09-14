@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\ShipService.cs" />
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\CruiseModel.cs" />
@@ -66,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{4a78312e-6a6b-4cd9-8ff2-44d734a6b7c4}</Project>
+      <Project>{dec6d5f8-12dc-4ecc-9da6-8d2f8916b543}</Project>
       <Name>Database</Name>
     </ProjectReference>
   </ItemGroup>

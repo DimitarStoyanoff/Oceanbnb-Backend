@@ -14,6 +14,11 @@ namespace Services.Models
         public double Longitude { get; set; }
         public bool IsDeleted { get; set; }
 
+        public LocationModel()
+        {
+
+        }
+
         public LocationModel(int LocationId, string LocationName, double Lattitude, double Longitude, bool IsDeleted)
         {
             this.LocationId = LocationId;

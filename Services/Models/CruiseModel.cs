@@ -14,6 +14,11 @@ namespace Services.Models
         public bool IsDeleted { get; set; }
         public List<LocationModel> LocationsList { get; set; }
 
+        public CruiseModel()
+        {
+
+        }
+
         public CruiseModel(int CruiseId, string CruiseName, int ShipId, bool IsDeleted, List<LocationModel> LocationsList)
         {
             this.CruiseId = CruiseId;

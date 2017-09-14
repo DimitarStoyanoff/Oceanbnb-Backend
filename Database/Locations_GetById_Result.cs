@@ -15,6 +15,8 @@ namespace Database
     {
         public int LocationId { get; set; }
         public string LocationName { get; set; }
+        public Nullable<double> Lattitude { get; set; }
+        public Nullable<double> Longitude { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     }
 }

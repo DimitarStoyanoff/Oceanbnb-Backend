@@ -56,26 +56,13 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                 Users_GetByAspId_Result userResult = db.Users_GetByAspId(aspUserId).SingleOrDefault();
-                return new UserModel(userResult.UserId, userResult.UserName, userResult.Email, userResult.Gender, userResult.City, userResult.Description,
-                    userResult.ProfilePhoto, aspUserId, userResult.IsDeleted);
-            }
-        }
-
-        public void GetCruiseById(int cruiseId)
-        {
-            using (var db = new OceanbnbDbEntities())
-            {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<UsersToCruises_GetById_Result, CruiseModel>());
-                Cruises_GetById_Result cruiseResult = db.Cruises_GetById(cruiseId).SingleOrDefault();
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Users_GetByAspId_Result, UserModel>());
                 var mapper = config.CreateMapper();
-                CruiseModel cruise = mapper.Map<CruiseModel>(cruiseResult);
-                List<LocationsToCruises_GetCruiseLocations_Result> locations = 
-                    db.LocationsToCruises_GetCruiseLocations(cruiseId).ToList();
+                UserModel userModel = mapper.Map<UserModel>(userResult);
+                userModel.AspUserId = aspUserId;
+                return userModel;
             }
         }
 
-        
-        
-       
     }
 }

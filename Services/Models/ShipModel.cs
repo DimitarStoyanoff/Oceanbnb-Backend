@@ -18,6 +18,11 @@ namespace Services.Models
         public int BeamInMeters { get; set; }
         public bool IsDeleted { get; set; }
 
+        public ShipModel()
+        {
+
+        }
+
         public ShipModel(int shipId, string shipName, int yearBuilt, int passengerCapacity, int crewCount, int weightInTons, int lengthInMeters, int beamInMeters, bool isDeleted)
         {
             ShipId = shipId;

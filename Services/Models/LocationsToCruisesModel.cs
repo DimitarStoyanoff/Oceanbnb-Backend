@@ -15,6 +15,11 @@ namespace Services.Models
         public DateTime DateInserted { get; set; }
         public DateTime DateModified { get; set; }
 
+        public LocationsToCruisesModel()
+        {
+
+        }
+
         public LocationsToCruisesModel(int locationstoCruisesId, int locationId, int cruiseId, bool isDeleted, DateTime dateInserted, DateTime dateModified)
         {
             LocationstoCruisesId = locationstoCruisesId;

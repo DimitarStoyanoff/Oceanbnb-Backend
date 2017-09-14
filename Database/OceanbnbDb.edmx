@@ -943,6 +943,8 @@
         <ComplexType Name="Locations_GetById_Result">
           <Property Type="Int32" Name="LocationId" Nullable="false" />
           <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Lattitude" Nullable="true" />
+          <Property Type="Double" Name="Longitude" Nullable="true" />
           <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
         </ComplexType>
         <ComplexType Name="LocationsToCruises_GetById_Result">
@@ -1214,6 +1216,8 @@
               <ComplexTypeMapping TypeName="OceanbnbDbModel.Locations_GetById_Result">
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="Lattitude" ColumnName="Lattitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </ComplexTypeMapping>
             </ResultMapping>
