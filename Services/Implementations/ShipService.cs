@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 
 namespace Services.Implementations
 {
-    class ShipService
+    public class ShipService
     {
+        private MapperConfiguration config;
+        private IMapper mapper;
+
+        public ShipService()
+        {
+            config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetById_Result, ShipModel>());
+            mapper = config.CreateMapper();
+        }
         public ShipModel GetShipById(int shipId)
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetById_Result, ShipModel>());
-                var mapper = config.CreateMapper();
                 return mapper.Map<ShipModel>(db.Ships_GetById(shipId).SingleOrDefault());
             }
         }
@@ -26,8 +32,6 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                 db.Ships_Delete(shipId);
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetById_Result, ShipModel>());
-                var mapper = config.CreateMapper();
                 return mapper.Map<ShipModel>(db.Ships_GetById(shipId).SingleOrDefault());
             }
         }
@@ -37,20 +41,26 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                 var id = db.Ships_Update(shipId, shipName, yearBuilt, passengerCapacity, crewCount, weightInTons, lengthInMeters, beamInMeters).SingleOrDefault();
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetById_Result, ShipModel>());
-                var mapper = config.CreateMapper();
                 return mapper.Map<ShipModel>(db.Ships_GetById(shipId).SingleOrDefault());
             }
         }
 
-        public ShipModel InsertShip(int shipId, string shipName, int yearBuilt, int passengerCapacity, int crewCount, int weightInTons, int lengthInMeters, int beamInMeters)
+        public ShipModel InsertShip(string shipName, int yearBuilt, int passengerCapacity, int crewCount, int weightInTons, int lengthInMeters, int beamInMeters)
         {
             using (var db = new OceanbnbDbEntities())
             {
                 var id = db.Ships_Insert(shipName, yearBuilt, passengerCapacity, crewCount, weightInTons, lengthInMeters, beamInMeters).SingleOrDefault();
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetById_Result, ShipModel>());
-                var mapper = config.CreateMapper();
                 return mapper.Map<ShipModel>(db.Ships_GetById(int.Parse(id.ToString())).SingleOrDefault());
+            }
+        }
+
+        public List<ShipModel> GetAllShips()
+        {
+            using (var db = new OceanbnbDbEntities())
+            {
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<List<Ships_GetById_Result>, List<ShipModel>>());
+                var mapper = config.CreateMapper();
+                return mapper.Map<List<ShipModel>>(db.Ships_GetAllShips());
             }
         }
     }

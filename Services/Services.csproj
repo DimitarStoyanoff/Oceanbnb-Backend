@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\CruiseService.cs" />
+    <Compile Include="Implementations\LocationService.cs" />
     <Compile Include="Implementations\ShipService.cs" />
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
