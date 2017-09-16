@@ -28,7 +28,7 @@ namespace Services.Implementations
             }
         }
 
-        public LocationModel InsertLocation(string locationName, float lattitude, float longitude)
+        public LocationModel InsertLocation(string locationName, double lattitude, double longitude)
         {
             using (var db = new OceanbnbDbEntities())
             {
@@ -38,7 +38,7 @@ namespace Services.Implementations
             }
         }
 
-        public LocationModel UpdateLocaiton(int locationId, string locationName, float lattitude, float longitude)
+        public LocationModel UpdateLocaiton(int locationId, string locationName, double lattitude, double longitude)
         {
             using (var db = new OceanbnbDbEntities())
             {
