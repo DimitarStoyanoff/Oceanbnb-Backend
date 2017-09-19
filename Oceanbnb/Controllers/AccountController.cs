@@ -28,6 +28,7 @@ namespace Oceanbnb.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private UserService userService = new UserService();
+        private CruiseService cruiseService = new CruiseService();
 
         public AccountController()
         {
@@ -53,6 +54,18 @@ namespace Oceanbnb.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+        // GET api/account/5/cruises
+        [Route("ships")]
+        public IHttpActionResult GetDetails()
+        {
+            var response = cruiseService.GetUserCruises(User.Identity.GetUserId());
+            if (response == null)
+            {
+                return BadRequest();
+            }
+            return Ok(response);
+        }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

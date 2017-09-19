@@ -11,14 +11,16 @@ namespace Database
 {
     using System;
     
-    public partial class LocationsToCruises_GetCruiseLocations_Result
+    public partial class UsersToCruises_GetCruiseUsers_Result
     {
-        public int LocationsToCruisesId { get; set; }
-        public int LocationId { get; set; }
-        public string LocationName { get; set; }
-        public Nullable<double> Lattitude { get; set; }
-        public Nullable<double> Longitude { get; set; }
-        public int CruiseId { get; set; }
+        public int UsersToCruisesId { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string City { get; set; }
+        public string Gender { get; set; }
+        public string Description { get; set; }
+        public string ProfilePhoto { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }

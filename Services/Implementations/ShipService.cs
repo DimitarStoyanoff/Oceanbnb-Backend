@@ -58,9 +58,9 @@ namespace Services.Implementations
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<List<Ships_GetById_Result>, List<ShipModel>>());
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Ships_GetAllShips_Result, ShipModel>());
                 var mapper = config.CreateMapper();
-                return mapper.Map<List<ShipModel>>(db.Ships_GetAllShips());
+                return mapper.Map<List<Ships_GetAllShips_Result>,List<ShipModel>>(db.Ships_GetAllShips().ToList());
             }
         }
     }

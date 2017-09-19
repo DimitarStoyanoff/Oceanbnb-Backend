@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DEC6D5F8-12DC-4ECC-9DA6-8D2F8916B543}</ProjectGuid>
+    <ProjectGuid>{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Database</RootNamespace>
@@ -129,6 +129,9 @@
       <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersToCruises_GetById_Result.cs">
+      <DependentUpon>OceanbnbDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersToCruises_GetCruiseUsers_Result.cs">
       <DependentUpon>OceanbnbDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersToCruises_GetUserCruises_Result.cs">

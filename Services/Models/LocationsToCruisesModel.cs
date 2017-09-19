@@ -10,6 +10,9 @@ namespace Services.Models
     {
         public int LocationstoCruisesId { get; set; }
         public int LocationId { get; set; }
+        public string LocationName { get; set; }
+        public double Lattitude { get; set; }
+        public double Longitude { get; set; }
         public int CruiseId { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateInserted { get; set; }

@@ -56,9 +56,11 @@
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\CruiseModel.cs" />
+    <Compile Include="Models\CruiseUsersModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\LocationsToCruisesModel.cs" />
     <Compile Include="Models\ShipModel.cs" />
+    <Compile Include="Models\UserCruisesModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UsersToCruisesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{dec6d5f8-12dc-4ecc-9da6-8d2f8916b543}</Project>
+      <Project>{d2fd07c8-a067-4ce7-9fc7-f2de1653aefc}</Project>
       <Name>Database</Name>
     </ProjectReference>
   </ItemGroup>

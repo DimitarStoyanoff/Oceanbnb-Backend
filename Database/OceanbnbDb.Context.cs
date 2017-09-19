@@ -176,12 +176,8 @@ namespace Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LocationsToCruises_GetCruiseLocations_Result>("LocationsToCruises_GetCruiseLocations", cruiseIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> LocationsToCruises_InsertUpdate(Nullable<int> locationsToCruisesId, Nullable<int> locationId, Nullable<int> cruiseId, Nullable<bool> isDeleted)
+        public virtual ObjectResult<Nullable<decimal>> LocationsToCruises_InsertUpdate(Nullable<int> locationId, Nullable<int> cruiseId, Nullable<bool> isDeleted)
         {
-            var locationsToCruisesIdParameter = locationsToCruisesId.HasValue ?
-                new ObjectParameter("LocationsToCruisesId", locationsToCruisesId) :
-                new ObjectParameter("LocationsToCruisesId", typeof(int));
-    
             var locationIdParameter = locationId.HasValue ?
                 new ObjectParameter("LocationId", locationId) :
                 new ObjectParameter("LocationId", typeof(int));
@@ -194,7 +190,7 @@ namespace Database
                 new ObjectParameter("IsDeleted", isDeleted) :
                 new ObjectParameter("IsDeleted", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("LocationsToCruises_InsertUpdate", locationsToCruisesIdParameter, locationIdParameter, cruiseIdParameter, isDeletedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("LocationsToCruises_InsertUpdate", locationIdParameter, cruiseIdParameter, isDeletedParameter);
         }
     
         public virtual int Ships_Delete(Nullable<int> shipId)
@@ -393,13 +389,13 @@ namespace Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int Users_Delete(Nullable<int> userId)
+        public virtual ObjectResult<Nullable<decimal>> Users_Delete(Nullable<int> userId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Users_Delete", userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Users_Delete", userIdParameter);
         }
     
         public virtual ObjectResult<Users_GetByAspId_Result> Users_GetByAspId(string aspUserId)
@@ -504,21 +500,26 @@ namespace Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsersToCruises_GetById_Result>("UsersToCruises_GetById", usersToCruisesIdParameter);
         }
     
-        public virtual ObjectResult<UsersToCruises_GetUserCruises_Result> UsersToCruises_GetUserCruises(Nullable<int> userId)
+        public virtual ObjectResult<UsersToCruises_GetCruiseUsers_Result> UsersToCruises_GetCruiseUsers(Nullable<int> cruiseId)
         {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
+            var cruiseIdParameter = cruiseId.HasValue ?
+                new ObjectParameter("CruiseId", cruiseId) :
+                new ObjectParameter("CruiseId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsersToCruises_GetUserCruises_Result>("UsersToCruises_GetUserCruises", userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsersToCruises_GetCruiseUsers_Result>("UsersToCruises_GetCruiseUsers", cruiseIdParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> UsersToCruises_InsertUpdate(Nullable<int> usersToCruisesId, Nullable<int> userId, Nullable<int> cruiseId, Nullable<bool> isDeleted)
+        public virtual ObjectResult<UsersToCruises_GetUserCruises_Result> UsersToCruises_GetUserCruises(string aspUserId)
         {
-            var usersToCruisesIdParameter = usersToCruisesId.HasValue ?
-                new ObjectParameter("UsersToCruisesId", usersToCruisesId) :
-                new ObjectParameter("UsersToCruisesId", typeof(int));
+            var aspUserIdParameter = aspUserId != null ?
+                new ObjectParameter("AspUserId", aspUserId) :
+                new ObjectParameter("AspUserId", typeof(string));
     
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsersToCruises_GetUserCruises_Result>("UsersToCruises_GetUserCruises", aspUserIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> UsersToCruises_InsertUpdate(Nullable<int> userId, Nullable<int> cruiseId, Nullable<bool> isDeleted)
+        {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
@@ -531,7 +532,7 @@ namespace Database
                 new ObjectParameter("IsDeleted", isDeleted) :
                 new ObjectParameter("IsDeleted", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("UsersToCruises_InsertUpdate", usersToCruisesIdParameter, userIdParameter, cruiseIdParameter, isDeletedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("UsersToCruises_InsertUpdate", userIdParameter, cruiseIdParameter, isDeletedParameter);
         }
     }
 }

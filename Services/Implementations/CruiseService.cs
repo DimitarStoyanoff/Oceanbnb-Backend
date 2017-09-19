@@ -33,13 +33,13 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                
-                var locationConfig = new MapperConfiguration(cfg => cfg.CreateMap<List<Locations_GetById_Result>, List<LocationModel>>());
+                var locationConfig = new MapperConfiguration(cfg => cfg.CreateMap<LocationsToCruises_GetCruiseLocations_Result, LocationModel>());
                 var locationMapper = locationConfig.CreateMapper();
                 Cruises_GetById_Result cruiseResult = db.Cruises_GetById(cruiseId).SingleOrDefault();
                 
                 CruiseModel cruise = cruiseMapper.Map<CruiseModel>(cruiseResult);
                 List<LocationModel> locations =
-                   locationMapper.Map<List<LocationModel>>(db.LocationsToCruises_GetCruiseLocations(cruiseId).ToList());
+                   locationMapper.Map<List<LocationsToCruises_GetCruiseLocations_Result>,List<LocationModel>>(db.LocationsToCruises_GetCruiseLocations(cruiseId).ToList());
                 cruise.LocationsList = locations;
                 return cruise;
             }
@@ -57,9 +57,9 @@ namespace Services.Implementations
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<List<Cruises_GetAllCruises_Result>, List<CruiseModel>>());
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Cruises_GetAllCruises_Result, CruiseModel>());
                 var map = config.CreateMapper();
-                return cruiseMapper.Map<List<CruiseModel>>(db.Cruises_GetAllCruises().ToList());
+                return cruiseMapper.Map<List<Cruises_GetAllCruises_Result>, List<CruiseModel>>(db.Cruises_GetAllCruises().ToList());
             }
         }
 
@@ -94,17 +94,17 @@ namespace Services.Implementations
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var id = db.LocationsToCruises_InsertUpdate(0, locationId, cruiseId, false).SingleOrDefault();
-                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())));
+                var id = db.LocationsToCruises_InsertUpdate(locationId, cruiseId, false).SingleOrDefault();
+                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())).SingleOrDefault());
             }
         }
 
-        public LocationsToCruisesModel UpdateLocationToCruise(int locationToCruiseId,int locationId, int cruiseId, bool isDeleted)
+        public bool UpdateLocationToCruise(int locationId, int cruiseId, bool isDeleted)
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var id = db.LocationsToCruises_InsertUpdate(locationToCruiseId, locationId, cruiseId, isDeleted).SingleOrDefault();
-                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())));
+                var id = db.LocationsToCruises_InsertUpdate(locationId, cruiseId, isDeleted).SingleOrDefault();
+                return true;
             }
         }
 
@@ -113,7 +113,7 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                 var id = db.LocationsToCruises_GetById(locationToCruiseId).SingleOrDefault();
-                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())));
+                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())).SingleOrDefault());
             }
         }
 
@@ -122,18 +122,29 @@ namespace Services.Implementations
             using (var db = new OceanbnbDbEntities())
             {
                 var id = db.LocationsToCruises_Delete(locationToCruiseId).SingleOrDefault();
-                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())));
+                return locationToCruiseMapper.Map<LocationsToCruisesModel>(db.LocationsToCruises_GetById(int.Parse(id.ToString())).SingleOrDefault());
             }
         }
 
-        public List<UsersToCruisesModel> GetUserCruises(int cruiseId)
+        public List<UsersToCruisesModel> GetUserCruises(string aspUserId)
         {
             using (var db = new OceanbnbDbEntities())
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<List<UsersToCruises_GetById_Result>, List<UsersToCruisesModel>>());
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<UsersToCruises_GetUserCruises_Result, UsersToCruisesModel>());
                 var mapper = config.CreateMapper();
-                return mapper.Map<List<UsersToCruisesModel>>(db.UsersToCruises_GetUserCruises(cruiseId).ToList());
+                return mapper.Map<List<UsersToCruises_GetUserCruises_Result>, List<UsersToCruisesModel>>(db.UsersToCruises_GetUserCruises(aspUserId).ToList());
             }
+        }
+
+        public List<CruiseUsersModel> GetCruiseUsers(int cruiseId)
+        {
+            using (var db = new OceanbnbDbEntities())
+            {
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<UsersToCruises_GetCruiseUsers_Result, CruiseUsersModel>());
+                var mapper = config.CreateMapper();
+                return mapper.Map<List<UsersToCruises_GetCruiseUsers_Result>, List<CruiseUsersModel>>(db.UsersToCruises_GetCruiseUsers(cruiseId).ToList());
+            }
+
         }
 
        
@@ -141,15 +152,16 @@ namespace Services.Implementations
         {
             using (var db = new OceanbnbDbEntities())
             {
-                return userToCruiseMapper.Map<UsersToCruisesModel>(db.UsersToCruises_InsertUpdate(0,userId,cruiseId,false).SingleOrDefault());
+                return userToCruiseMapper.Map<UsersToCruisesModel>(db.UsersToCruises_InsertUpdate(userId,cruiseId,false).SingleOrDefault());
             }
         }
 
-        public UsersToCruisesModel UpdateCruiseUser(int userToCruiseId,int userId, int cruiseId, bool isDeleted)
+        public bool UpdateCruiseUser(int userId, int cruiseId, bool isDeleted)
         {
             using (var db = new OceanbnbDbEntities())
             {
-                return userToCruiseMapper.Map<UsersToCruisesModel>(db.UsersToCruises_InsertUpdate(userToCruiseId, userId, cruiseId, isDeleted).SingleOrDefault());
+                db.UsersToCruises_InsertUpdate( userId, cruiseId, isDeleted).SingleOrDefault();
+                return true;
             }
         }
 

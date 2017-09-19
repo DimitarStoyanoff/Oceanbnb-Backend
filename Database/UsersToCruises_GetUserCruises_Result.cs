@@ -16,6 +16,8 @@ namespace Database
         public int UsersToCruisesId { get; set; }
         public int UserId { get; set; }
         public int CruiseId { get; set; }
+        public string CruiseName { get; set; }
+        public Nullable<int> ShipId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
         public Nullable<System.DateTime> DateModified { get; set; }

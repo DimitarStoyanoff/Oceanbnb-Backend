@@ -11,6 +11,8 @@ namespace Services.Models
         public int UsersToCruisesId { get; set; }
         public int UserId { get; set; }
         public int CruiseId { get; set; }
+        public string CruiseName { get; set; }
+        public int ShipId { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime DateInserted { get; set; }
         public DateTime DateModified { get; set; }
