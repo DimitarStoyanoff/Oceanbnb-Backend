@@ -55,8 +55,8 @@ namespace Oceanbnb.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        // GET api/account/5/cruises
-        [Route("ships")]
+        // GET api/account/cruises
+        [Route("cruises")]
         public IHttpActionResult GetDetails()
         {
             var response = cruiseService.GetUserCruises(User.Identity.GetUserId());
