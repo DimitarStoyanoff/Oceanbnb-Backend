@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Oceanbnb.Models
+namespace Database
 {
     using System;
     using System.Collections.Generic;
@@ -23,6 +23,7 @@ namespace Oceanbnb.Models
         public int LocationId { get; set; }
         public string LocationName { get; set; }
         public System.Data.Entity.Spatial.DbGeography Geolocation { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LocationsToCruis> LocationsToCruises { get; set; }
