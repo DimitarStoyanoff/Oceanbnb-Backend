@@ -8,7 +8,7 @@ namespace Services.Models
 {
     public class LocationsToCruisesModel
     {
-        public int LocationstoCruisesId { get; set; }
+        public int LocationsToCruisesId { get; set; }
         public int LocationId { get; set; }
         public string LocationName { get; set; }
         public double Lattitude { get; set; }
@@ -25,7 +25,7 @@ namespace Services.Models
 
         public LocationsToCruisesModel(int locationstoCruisesId, int locationId, int cruiseId, bool isDeleted, DateTime dateInserted, DateTime dateModified)
         {
-            LocationstoCruisesId = locationstoCruisesId;
+            LocationsToCruisesId = locationstoCruisesId;
             LocationId = locationId;
             CruiseId = cruiseId;
             IsDeleted = isDeleted;

@@ -59,7 +59,7 @@ namespace Services.Implementations
             {
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<Cruises_GetAllCruises_Result, CruiseModel>());
                 var map = config.CreateMapper();
-                return cruiseMapper.Map<List<Cruises_GetAllCruises_Result>, List<CruiseModel>>(db.Cruises_GetAllCruises().ToList());
+                return map.Map<List<Cruises_GetAllCruises_Result>, List<CruiseModel>>(db.Cruises_GetAllCruises().ToList());
             }
         }
 

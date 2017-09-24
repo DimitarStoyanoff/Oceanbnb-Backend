@@ -60,7 +60,6 @@
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\LocationsToCruisesModel.cs" />
     <Compile Include="Models\ShipModel.cs" />
-    <Compile Include="Models\UserCruisesModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UsersToCruisesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{d2fd07c8-a067-4ce7-9fc7-f2de1653aefc}</Project>
+      <Project>{1bb569fa-6f7e-4e16-80a9-172549afe888}</Project>
       <Name>Database</Name>
     </ProjectReference>
   </ItemGroup>

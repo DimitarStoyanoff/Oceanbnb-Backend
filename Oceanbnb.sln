@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oceanbnb", "Oceanbnb\Oceanb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{8E0590C4-CF38-4197-B26B-FBC14B8B75E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{1BB569FA-6F7E-4E16-80A9-172549AFE888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8E0590C4-CF38-4197-B26B-FBC14B8B75E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0590C4-CF38-4197-B26B-FBC14B8B75E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0590C4-CF38-4197-B26B-FBC14B8B75E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2FD07C8-A067-4CE7-9FC7-F2DE1653AEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB569FA-6F7E-4E16-80A9-172549AFE888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB569FA-6F7E-4E16-80A9-172549AFE888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB569FA-6F7E-4E16-80A9-172549AFE888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB569FA-6F7E-4E16-80A9-172549AFE888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
